@@ -23,7 +23,7 @@ public class LibraryApp {
 		try {
 
 			System.out.println();
-			System.out.println("*************************");
+			System.out.println("***************************");
 			System.out.println("Library Management System");
 			System.out.println("**************************");
 
