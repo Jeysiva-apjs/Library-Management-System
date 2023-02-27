@@ -17,7 +17,7 @@ public class Author {
 	}
 	
 	public void setName(String name) {
-		if(name == null)
+		if(name.isEmpty())
 			throw new IllegalArgumentException("Author name cannot be null");
 		
 		this.name = name;

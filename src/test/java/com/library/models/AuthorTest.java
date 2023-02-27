@@ -31,5 +31,31 @@ class AuthorTest {
 		assertThrows(IllegalArgumentException.class, executable);
 			
 	}
+	
+	@Test
+	void should_ThrowIllegalArgumentException_when_NameIsEmpty2() {
+		//Given 
+		Author author = new Author("john");
+		
+		//When
+		Executable executable = () -> author.setName("");
+		
+		//Then
+		assertThrows(IllegalArgumentException.class, executable);
+			
+	}
+	
+	@Test
+	void testSetName() {
+		//Given 
+		Author author = new Author("john");
+		
+		//When
+		author.setName("Jack");
+		
+		//Then
+		assertEquals("Jack", author.getName());
+		
+	}
 
 }

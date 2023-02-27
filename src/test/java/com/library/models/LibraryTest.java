@@ -59,6 +59,7 @@ class LibraryTest {
 		assertThrows(IllegalStateException.class, executable);
 
 	}
+	
 
 	@Test
 	void testSearchBooksByISBN() {
@@ -73,15 +74,21 @@ class LibraryTest {
 
 	}
 	
+
+	
 	@Test
-	void should_ThrowIllegalArgumentException_When_InvalidISBN() {
-
-
+	void should_ThrowIllegalArgumentException_When_InvalidData() {
 		// When
-		Executable executable = () -> library.searchBooks("0009");
+		Executable ISBNexecutable = () -> library.searchBooks("0009");
+		Executable Titleexecutable = () -> library.searchBooks("happiness");
+		Executable Authorexecutable = () -> library.searchBooks("chetan");
 
 		// Then
-		assertThrows(IllegalArgumentException.class, executable);
+		assertAll( () -> assertThrows(IllegalArgumentException.class, ISBNexecutable),
+				() -> assertThrows(IllegalArgumentException.class, Authorexecutable),
+				() -> assertThrows(IllegalArgumentException.class, Titleexecutable)	
+				);
+		
 
 	}
 
@@ -98,16 +105,6 @@ class LibraryTest {
 
 	}
 	
-	@Test
-	void should_ThrowIllegalArgumentException_When_InvalidTitle() {
-	
-		// When
-		Executable executable = () -> library.searchBooks("happiness");
-
-		// Then
-		assertThrows(IllegalArgumentException.class, executable);
-
-	}
 
 	@Test
 	void testSearchBooksByAuthorName() {
@@ -122,16 +119,6 @@ class LibraryTest {
 
 	}
 	
-	@Test
-	void should_ThrowIllegalArgumentException_When_InvalidAuthorName() {
-
-		// When
-		Executable executable = () -> library.searchBooks("chetan");
-
-		// Then
-		assertThrows(IllegalArgumentException.class, executable);
-
-	}
 
 	@Test
 	void testUpdateBook() {
@@ -150,14 +137,38 @@ class LibraryTest {
 	}
 
 	@Test
+	void testRemoveBook_When_BookIsNotPresent() {
+		//When 
+		Executable executable = () -> library.removeBook("1111");;
+		
+		//Then 
+		assertThrows(IllegalArgumentException.class, executable);
+
+	}
+	
+	@Test
 	void testRemoveBook() {
 		
 		//When 
 		library.removeBook("0001");
-		Executable executable = () -> library.searchBooks("0000");
+		Executable executable = () -> library.searchBooks("0001");
 		
 		//Then 
 		assertThrows(IllegalArgumentException.class, executable);
+
+	}
+	
+	@Test
+	void should_ThrowIllegalStateException_when_GettingBooksFromEmptyLibrary() {
+		// Given
+		library.removeBook("0001");
+		library.removeBook("0002");
+
+		// When
+		Executable executable = () -> library.getAllBooksSortedByPublicationYear();
+
+		// Then
+		assertThrows(IllegalStateException.class, executable);
 
 	}
 

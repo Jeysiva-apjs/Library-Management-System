@@ -76,5 +76,19 @@ class BookTest {
 		// Then
 		assertThrows(IllegalArgumentException.class, executable);
 	}
+	
+	@Test
+	void should_ReturnTheBookDetails() {
+		//Given
+		Book book;
+		
+		//When
+		book = new Book("0001", "peace", 1990, new ArrayList<Author>(List.of(new Author("siva"), new Author("john"))));
+		
+		//Then
+		assertEquals("\nISBN: 0001" + "\nTitle: peace" + "\nPublication Year: 1990"
+				 + "\nAuthors: [siva, john]" , book.toString());
+		
+	}
 
 }
