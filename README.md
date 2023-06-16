@@ -13,3 +13,8 @@ In addition, the application **can handle errors and exceptions gracefully**, fo
 
 The unit testing was implemented using **Junit5 with 100% test coverage.**
 
+# Class Diagram
+
+![image](https://github.com/Jeysiva-apjs/Library-Management-System/assets/126048586/211596e0-fde3-49d9-af9a-1446212ed7fe)
+
+
